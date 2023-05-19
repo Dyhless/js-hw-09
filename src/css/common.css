@@ -10,9 +10,31 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  display: flex;
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+#datetime-picker {
+  margin-left: 10px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-family: Arial, sans-serif;
+}
+
+.field {
+  text-align: center;
+  margin: 0px 10px;
+}
+
+.value {
+  font-size: 2rem;
 }
