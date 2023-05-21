@@ -11,9 +11,12 @@ const refs = {
   secondsValue: document.querySelector("[data-seconds]")
 };
 
-let intervalId;
+let intervalId = null;
 
 const { picker, startBtn, daysValue, hoursValue, minutesValue, secondsValue } = refs;
+
+
+let selectedDate;
 
 const options = {
   enableTime: true,
@@ -21,7 +24,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    const selectedDate = selectedDates[0];
+    selectedDate = selectedDates[0];
 
     if (selectedDate <= new Date()) {
       Notiflix.Notify.failure("Please choose a date in the future");
@@ -32,55 +35,48 @@ const options = {
   },
 };
 
-flatpickr(picker, options);
+
+const datePickerComp = flatpickr(picker, options);
 
 startBtn.addEventListener("click", startTimer);
 
-function startTimer() {
-  const selectedDates = picker.selectedDates;
+const intervalCallBack = () => {
 
-  if (selectedDates.length === 0) {
-    // Если нет выбранной даты, обработать соответствующую ошибку или просто вернуться
-    return;
+
+  const leftMIllisecond = datePickerComp.latestSelectedDateObj.getTime() - Date.now();
+
+
+    const {days, hours, minutes, seconds } = convertMs(leftMIllisecond);
+    daysValue.innerHTML = days; 
+    hoursValue.innerHTML = hours; 
+    minutesValue.innerHTML = minutes; 
+    secondsValue.innerHTML = seconds; 
+      
+  if (leftMIllisecond < 1000) {
+    clearInterval(intervalId);
   }
-
-  const selectedDate = selectedDates[0];
-  let countdown = selectedDate.getTime() - new Date().getTime();
-
-  startBtn.disabled = true;
-
-  intervalId = setInterval(() => {
-    const timeLeft = convertMs(countdown);
-
-    daysValue.textContent = addLeadingZero(timeLeft.days);
-    hoursValue.textContent = addLeadingZero(timeLeft.hours);
-    minutesValue.textContent = addLeadingZero(timeLeft.minutes);
-    secondsValue.textContent = addLeadingZero(timeLeft.seconds);
-
-    countdown -= 1000;
-
-    if (countdown < 0) {
-      clearInterval(intervalId);
-      startBtn.disabled = false;
-      Notiflix.Notify.success("Countdown finished!");
-    }
-  }, 1000);
 }
 
+function startTimer() {
+  intervalId = setInterval(intervalCallBack, 1000);
+};
+
+
 function convertMs(ms) {
+  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
+  // Remaining days
   const days = Math.floor(ms / day);
+  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
+  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
+  // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
-
-function addLeadingZero(value) {
-  return value.toString().padStart(2, "0");
 }
