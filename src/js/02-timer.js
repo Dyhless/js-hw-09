@@ -15,7 +15,6 @@ let intervalId = null;
 
 const { picker, startBtn, daysValue, hoursValue, minutesValue, secondsValue } = refs;
 
-
 let selectedDate;
 
 const options = {
@@ -35,16 +34,13 @@ const options = {
   },
 };
 
-
 const datePickerComp = flatpickr(picker, options);
 
 startBtn.addEventListener("click", startTimer);
 
 const intervalCallBack = () => {
 
-
   const leftMIllisecond = datePickerComp.latestSelectedDateObj.getTime() - Date.now();
-
 
     const {days, hours, minutes, seconds } = convertMs(leftMIllisecond);
     daysValue.innerHTML = days; 
@@ -60,7 +56,6 @@ const intervalCallBack = () => {
 function startTimer() {
   intervalId = setInterval(intervalCallBack, 1000);
 };
-
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
