@@ -36,6 +36,7 @@ function createPromises(amount, delay, step) {
       }, currentDelay);
     });
 
+    
     // Обрабатываем результат промиса
     promise
       .then(({ position, delay }) => {
