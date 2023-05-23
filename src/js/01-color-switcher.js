@@ -9,8 +9,10 @@ const refs = {
 
 let intervalId = null;
 let isIntervalActive = false;
+refs.stopBtn.disabled = true;
 
 refs.startBtn.addEventListener('click', () => {
+
    if (isIntervalActive) {
       return;
    }
@@ -19,11 +21,18 @@ refs.startBtn.addEventListener('click', () => {
    }, 1000);
    isIntervalActive = true;
    refs.startBtn.disabled = true;
+   refs.stopBtn.disabled = false;
 });
 
+
 refs.stopBtn.addEventListener('click', () => {
+   
+   if (!isIntervalActive) {
+      return 
+   }
    clearInterval(intervalId);
    document.body.style.backgroundColor = '';
-   isIntervalActive = false;
+   isIntervalActive = false; // нужно сбросить значение интервала, чтобы запустить заново
    refs.startBtn.disabled = false;
+   refs.stopBtn.disabled = true;
 });
