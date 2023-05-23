@@ -12,7 +12,7 @@ function handleSubmit(event) {
 
   form.reset();
 
-  createPromises(0, delay)
+  createPromise(0, delay)
     .then(({ position, delay }) => {
       Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
     })
@@ -21,7 +21,7 @@ function handleSubmit(event) {
     });
 }
 
-function createPromises(position, delay) {
+function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
 
