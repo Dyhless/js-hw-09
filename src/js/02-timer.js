@@ -11,10 +11,10 @@ const refs = {
   secondsValue: document.querySelector("[data-seconds]")
 };
 
-let intervalId = null;
-
 const { picker, startBtn, daysValue, hoursValue, minutesValue, secondsValue } = refs;
 
+startBtn.disabled = true;
+let intervalId = null;
 let selectedDate;
 
 const options = {
@@ -43,10 +43,10 @@ const intervalCallBack = () => {
   const leftMIllisecond = datePickerComp.latestSelectedDateObj.getTime() - Date.now();
 
     const {days, hours, minutes, seconds } = convertMs(leftMIllisecond);
-    daysValue.innerHTML = days; 
-    hoursValue.innerHTML = hours; 
-    minutesValue.innerHTML = minutes; 
-    secondsValue.innerHTML = seconds; 
+      daysValue.innerHTML = addLeadingZero(days);
+      hoursValue.innerHTML = addLeadingZero(hours);
+      minutesValue.innerHTML = addLeadingZero(minutes);
+      secondsValue.innerHTML = addLeadingZero(seconds);
       
   if (leftMIllisecond < 1000) {
     clearInterval(intervalId);
@@ -55,6 +55,11 @@ const intervalCallBack = () => {
 
 function startTimer() {
   intervalId = setInterval(intervalCallBack, 1000);
+
+  if (startTimer) {
+    startBtn.disabled = true;
+    picker.disabled = true;
+  }
 };
 
 function convertMs(ms) {
@@ -74,4 +79,8 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
+}
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, "0");
 }
