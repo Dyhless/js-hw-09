@@ -1,99 +1,265 @@
-# Parcel template
+## Asynchrony / Date / Promises
 
-Этот проект был создан при помощи Parcel. Для знакомства и настройки
-дополнительных возможностей [обратись к документации](https://parceljs.org/).
+### Acceptance criteria
 
-## Подготовка нового проекта
+- `js-hw-09` repository created.
+- In your submitted homework, there are two links for each project: to the
+  source files and your working page on `GitHub Pages`.
+- During live page visits, there are no errors or warnings generated in the
+  console.
+- Project built with
+  [parcel-project-template](https://github.com/goitacademy/parcel-project-template).
+- Code formatted with `Prettier`.
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Склонируй этот репозиторий.
-3. Измени имя папки с `parcel-project-template` на имя своего проекта.
-4. Создай новый пустой репозиторий на GitHub.
-5. Открой проект в VSCode, запусти терминал и свяжи проект с GitHub-репозиторием
-   [по инструкции](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Установи зависимости проекта в терминале командой `npm install` .
-7. Запусти режим разработки, выполнив команду `npm start`.
-8. Перейди в браузере по адресу [http://localhost:1234](http://localhost:1234).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+### Start files
 
-## Файлы и папки
+[Download the startup files](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/goitacademy/javascript-homework/tree/main/v2/09/src)
+with the layout, styles, and attached script files for each task. Copy them to
+your project, completely overwriting the src folder in
+[parcel-project-template](https://github.com/goitacademy/parcel-project-template).
 
-- Все паршалы файлов стилей должны лежать в папке `src/sass` и импортироваться в
-  файлы стилей страниц. Например, для `index.html` файл стилей называется
-  `index.scss`.
-- Изображения добавляй в папку `src/images`. Сборщик оптимизирует их, но только
-  при деплое продакшн версии проекта. Все это происходит в облаке, чтобы не
-  нагружать твой компьютер, так как на слабых машинах это может занять много
-  времени.
+### Task 1 - color switcher
 
-## Деплой
+Do this task in the `01-color-switcher.html` and `01-color-switcher.js` files.
+Check out the demo video of the switcher.
 
-Для настройки деплоя проекта необходимо выполнить несколько дополнительных шагов
-по настройке твоего репозитория. Зайди во вкладку `Settings` и в подсекции
-`Actions` выбери выбери пункт `General`.
+In HTML, there are "Start" and "Stop" buttons.
 
-![GitHub actions settings](./assets/actions-config-step-1.png)
-
-Пролистай страницу до последней секции, в которой убедись что выбраны опции как
-на следующем изображении и нажми `Save`. Без этих настроек у сборки будет
-недостаточно прав для автоматизации процесса деплоя.
-
-![GitHub actions settings](./assets/actions-config-step-2.png)
-
-Продакшн версия проекта будет автоматически собираться и деплоиться на GitHub
-Pages, в ветку `gh-pages`, каждый раз когда обновляется ветка `main`. Например,
-после прямого пуша или принятого пул-реквеста. Для этого необходимо в файле
-`package.json` отредактировать поле `homepage` и скрипт `build`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
-
-```json
-"homepage": "https://your_username.github.io/your_repo_name/",
-"scripts": {
-  "build": "parcel build src/*.html --public-url /your_repo_name/"
-},
+```javascript
+<button type="button" data-start>Start</button>
+<button type="button" data-stop>Stop</button>
 ```
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+Write a script that, after clicking the "Start" button, changes the `<body>`
+background color once a second to a random value using the inline style. When
+clicking on the "Stop" button, background color change must stop.
 
-![GitHub Pages settings](./assets/repo-settings.png)
+**ATENTION** Please note that the «Start» button can be clicked an infinite
+number of times. Make sure that the «Start» button is disabled while the theme
+change is running.
 
-### Статус деплоя
+Use the `getRandomHexColor` function to generate a random color.
 
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
+```javascript
+function getRandomHexColor() {
+  return;
+  `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
+```
 
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
+### Task 2 - countdown timer
 
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
+Do this task in the `02-timer.html` and `02-timer.js` files. Write a timer
+script that counts down to a specific date. Such a timer can be used in blogs
+and online stores, event-logging pages, during maintenance, etc. Watch a demo
+video of the timer.
 
-![Deployment status](./assets/status.png)
+### Interface elements
 
-### Живая страница
+In HTML, there is ready-made markup for the timer, end date selection field and
+a button that should trigger the timer when clicked. Add at least some
+decoration to the interface elements.
 
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/parcel-project-template](https://goitacademy.github.io/parcel-project-template).
+```javascript
+<input type="text" id="datetime-picker" />
+<button type="button" data-start>Start</button>
 
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` или скрипта `build` в
-файле `package.json`.
+<div class="timer">
+  <div class="field">
+    <span class="value" data-days>00</span>
+    <span class="label">Days</span>
+  </div>
+  <div class="field">
+    <span class="value" data-hours>00</span>
+    <span class="label">Hours</span>
+  </div>
+  <div class="field">
+    <span class="value" data-minutes>00</span>
+    <span class="label">Minutes</span>
+  </div>
+  <div class="field">
+    <span class="value" data-seconds>00</span>
+    <span class="label">Seconds</span>
+  </div>
+</div>
+```
 
-## Как это работает
+`flatpickr library `
 
-![How it works](./assets/how-it-works.png)
+Use the [flatpickr](https://flatpickr.js.org/) library to allow cross-browser
+selection of the end date and time in a single UI element. In order to add the
+CSS code of the library to the project, you need to add one more import, aside
+from the one described in the documentation.
 
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+```javascript
+// Described in documentation
+import flatpickr from 'flatpickr';
+// Additional styles import
+import 'flatpickr/dist/flatpickr.min.css';
+```
+
+The library expects to be initialized on the `input[type="text"]` element, so
+there is an `input#datetime-picker` field added to the HTML document.
+
+`<input type="text" id="datetime-picker" />`
+
+An optional parameter object can be passed as the second argument to the
+`flatpickr(selector, options)` function. We have prepared an object for you that
+you need to complete the task. Find about the role of each property in the
+[Options documentation](https://flatpickr.js.org/options/) and use it in your
+code.
+
+```javascript
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    console.log(selectedDates[0]);
+  },
+};
+```
+
+### Date selection
+
+The `onClose()` method is called from the parameter object every time the
+interface element that creates `flatpickr` is closed. It should be used to
+handle the date selected by the user. The `selectedDates` parameter is an array
+of the selected dates, so the first element is taken.
+
+- If the user selects a date from the past, show `window.alert()` with the text
+  `"Please choose a date in the future"`.
+- If the user has selected a valid date (in the future), the "Start" button
+  becomes active.
+- The "Start" button must be inactive until the user has selected a date in the
+  future.
+- When you click the "Start" button, the countdown to the selected date starts
+  from the time of clicking.
+
+### Countdown
+
+When you click on the "Start" button, the script must calculate once a second
+how much time is left until the specified date and update the timer interface,
+showing four numbers: days, hours, minutes and seconds in the following format:
+`xx:xx:xx:xx`.
+
+- The number of days can be more than two digits.
+- The timer must stop when it reaches the end date, that is, `00:00:00:00`.
+
+**LET'S NOT COMPLICATE THINGS** **_If the timer is running, in order to select a
+new date and restart it, you need to reload the page._**
+
+To calculate the values, use the ready-made function, `convertMs`, where `ms` is
+the difference between the end and current date in milliseconds.
+
+```javascript
+function convertMs(ms) {
+   // Number of milliseconds per unit of time
+   const second = 1000;
+   const minute = second _ 60;
+   const hour = minute _ 60;
+   const day = hour \* 24;
+
+   // Remaining days
+   const days = Math.floor(ms / day);
+   // Remaining hours const
+   hours = Math.floor((ms % day) / hour);
+   // Remaining minutes const minutes =
+   Math.floor(((ms % day) % hour) / minute);
+   // Remaining seconds const seconds =
+   Math.floor((((ms % day) % hour) % minute) / second);
+
+   return { days, hours, minutes, seconds }; }
+
+   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+   console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+   console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+```
+
+### Time formatting
+
+The `convertMs()` function returns an object with the calculated time remaining
+until the end date. Note that it does not format the result. That is, if there
+are 4 minutes (or any other time unit) left, the function will return `4`, not
+`04`. In the timer interface, you need to add 0 if there are less than two
+digits in the number. Write an `addLeadingZero(value)` function that uses the
+`padStart()` method and format the value before rendering the interface.
+
+### Notification library
+
+**ATTENTION** **_The following features are optional, but they will be a good
+additional practice._**
+
+Use the [notiflix](https://github.com/notiflix/Notiflix#readme) library to
+display notifications to the user instead of `window.alert()`.
+
+### Task 3 - promise generator
+
+Do this task in the `03-promises.html` and `03-promises.js` files. Watch a demo
+video of the promise generator.
+
+In HTML, there is form markup; in its fields, the user will enter the first
+delay in milliseconds, the delay increment for each promise after the first one
+and the number of promises to be created.
+
+```javascript
+<form class="form">
+  <label>
+    First delay (ms)
+    <input type="number" name="delay" required />
+  </label>
+  <label>
+    Delay step (ms)
+    <input type="number" name="step" required />
+  </label>
+  <label>
+    Amount
+    <input type="number" name="amount" required />
+  </label>
+  <button type="submit">Create promises</button>
+</form>
+```
+
+Write a script that, when submitting the form, calls the
+`createPromise(position, delay)` function as many times as you entered in the
+`amount` field. On each call, pass it the number of the promise to be created
+`(position)` and the delay given the first delay `(delay)` and step `(step)`
+entered by the user.
+
+```javascript
+   function createPromise(position, delay) {
+      const shouldResolve = Math.random() > 0.3;
+      if (shouldResolve) {
+         // Fulfill }
+      else {
+         // Reject
+      }
+   }
+```
+
+Supplement the code of the `createPromise` function so that it returns **one
+promise** that will be fulfilled or rejected after `delay` time. The value of
+the promise must be an object containing the `position` and `delay` properties
+with the values of these parameters. Use the initial function code to choose
+whether to fulfill or reject the promise.
+
+```javascript
+createPromise(2, 1500)
+  .then(({ position, delay }) => {
+    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+  })
+  .catch(({ position, delay }) => {
+    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+  });
+```
+
+### Notification library
+
+**ATTENTION** **_The following features are optional, but they will be a good
+additional practice._**
+
+Use the [notiflix](https://github.com/notiflix/Notiflix#readme) library to
+display notifications to the user instead of `console.log()`.
