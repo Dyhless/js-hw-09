@@ -18,7 +18,7 @@ with the layout, styles, and attached script files for each task. Copy them to
 your project, completely overwriting the src folder in
 [parcel-project-template](https://github.com/goitacademy/parcel-project-template).
 
-### Task 1 - color switcher
+## Task 1 - color switcher
 
 Do this task in the `01-color-switcher.html` and `01-color-switcher.js` files.
 Check out the demo video of the switcher.
@@ -49,7 +49,7 @@ function getRandomHexColor() {
 }
 ```
 
-### Task 2 - countdown timer
+## Task 2 - countdown timer
 
 Do this task in the `02-timer.html` and `02-timer.js` files. Write a timer
 script that counts down to a specific date. Such a timer can be used in blogs
@@ -196,7 +196,7 @@ additional practice._**
 Use the [notiflix](https://github.com/notiflix/Notiflix#readme) library to
 display notifications to the user instead of `window.alert()`.
 
-### Task 3 - promise generator
+## Task 3 - promise generator
 
 Do this task in the `03-promises.html` and `03-promises.js` files. Watch a demo
 video of the promise generator.
